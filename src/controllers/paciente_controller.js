@@ -24,7 +24,7 @@ const registroPaciente = async(req,res) => {
 
 const listarPacientes = async(req,res) => {
     // 1.- Interactuar BDD
-    const pacientes = await Paciente.find({estado:true}).where('veterinario').equals(req.veterinarioBDD).select("-salida -createdAt -updatedAt -__v").populate('veterinario','_id nombre apellido')
+    const pacientes = await Paciente.find({estado:true}).where('veterinario').equals(req.veterinarioBDD).select("-salida -createdAt -updatedAt -__v").populate('veterinario','_id nombre apellido').where('veterinario').equals(req.veterinarioBDD)
     res.status(200).json(pacientes)
 }
 
