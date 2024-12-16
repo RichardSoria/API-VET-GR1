@@ -1,5 +1,6 @@
-import Paciente from '../models/paciente.js'
+import Paciente from '../models/Paciente.js'
 import {sendMailToPaciente} from '../config/nodemailer.js'
+import generarJWT from "../helpers/crearJWT.js"
 import mongoose from 'mongoose'
 
 const registroPaciente = async(req,res) => {
