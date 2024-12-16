@@ -1,6 +1,6 @@
 import Veterinario from "../models/Veterinario.js"
 import {sendMailToUser, sendMailToRecoveryPassword} from "../config/nodemailer.js"
-import {generarJWT} from "../helpers/crearJWT.js"
+import generarJWT from "../helpers/crearJWT.js"
 import mongoose from "mongoose"
 
 const registro = async(req, res) => {
@@ -116,7 +116,6 @@ const nuevoPassword = async(req,res) => {
     res.status(200).json({msg: 'Contraseña reestablecida, ya puedes iniciar sesión.'})
 }
 
-
 const perfil =(req,res)=>{
     delete req.veterinarioBDD.token
     delete req.veterinarioBDD.confirmEmail
@@ -154,7 +153,7 @@ const actualizarPassword = async (req,res)=>{
     if(!veterinarioBDD) return res.status(404).json({msg:`Lo sentimos, no existe el veterinario ${id}`})
     const verificarPassword = await veterinarioBDD.matchPassword(req.body.passwordactual)
     if(!verificarPassword) return res.status(404).json({msg:"Lo sentimos, el password actual no es el correcto"})
-    veterinarioBDD.password = await veterinarioBDD.encrypPassword(req.body.passwordnuevo)
+    veterinarioBDD.password = await veterinarioBDD.encryptPassword(req.body.passwordnuevo)
     await veterinarioBDD.save()
     res.status(200).json({msg:"Password actualizado correctamente"})
 }

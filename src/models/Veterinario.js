@@ -18,7 +18,7 @@ const veterinarioSchema = new Schema({
         default:null
     },
     telefono:{
-        type:Number,
+        type:String,
         trim:true,
         default:null
     },
